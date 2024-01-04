@@ -1,15 +1,14 @@
-import {Container, GlobalStyle } from "./AppStyles";
-import GridComponent from "./components/GridCards/GridCards.tsx/GridCards";
-import HeaderComponent from "./components/Header/Header";
+import { GlobalStyle } from "./AppStyles";
+
+import { AppRoutes } from "./routes";
+import { BrowserRouter as Router } from "react-router-dom"; 
+
 function App() {
   return (
-    <>
+    <Router>
       <GlobalStyle />
-      <Container>
-        <HeaderComponent></HeaderComponent>
-        <GridComponent></GridComponent>
-      </Container>
-    </>
+      <AppRoutes />
+    </Router>
   );
 }
 

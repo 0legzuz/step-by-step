@@ -1,23 +1,10 @@
-import GridLayout from "react-grid-layout";
-import styled from "styled-components";
-import CardComponent from "../../Card/Card";
+
 import { useState } from "react";
+import CardComponent from "../../Card/Card";
+import * as S from "./GridCardsStyles";
 
-const GridContainer = styled(GridLayout)`
-  width: 1000px;
-  margin-top: 100px;
-`;
-
-const CenteredContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction:column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const GridComponent = () => {
-  const [cards, setCards] = useState([
+const GridComponent: React.FC = () => {
+  const [cards] = useState<Card[]>([
     {
       id: "1",
       imageUrl: "./images/1.jpg",
@@ -109,7 +96,7 @@ const GridComponent = () => {
     {
       id: "12",
       imageUrl: "./images/2.jpg",
-      text: "Токио ночью",
+      text: "12Токио ночью",
       description:
         "Токио — столица и крупнейший город Японии. Это один из самых современных и захватывающих городов мира. Ночной Токио прекрасен своими яркими огоньками и атмосферой. Ваш маршрут может включать посещение района Шиндзюку, храма Асакуса, парка Уэно и торговой улицы Харадзуку.",
       rating: 4,
@@ -117,7 +104,7 @@ const GridComponent = () => {
     {
       id: "13",
       imageUrl: "./images/3.jpg",
-      text: "Сеул",
+      text: "13Сеул",
       description:
         "Сеул — столица и крупнейший город Южной Кореи. Этот город сочетает в себе современные технологии и богатое культурное наследие. Сеул известен своей динамичной атмосферой. Путешествие в Сеул может включать посещение дворца Гёнбоккун, башни Н-Соль и традиционного рынка Намдэмун.",
       rating: 5,
@@ -125,7 +112,7 @@ const GridComponent = () => {
     {
       id: "14",
       imageUrl: "./images/4.jpg",
-      text: "Париж",
+      text: "14Париж",
       description:
         "Париж — столица Франции и один из культурных центров мира. Этот город известен своей романтичной атмосферой, прекрасной архитектурой и богатой историей. Ваш маршрут в Париже может включать посещение Эйфелевой башни, Лувра, Нотр-Дама и прогулку по набережной Сены.",
       rating: 2,
@@ -133,7 +120,7 @@ const GridComponent = () => {
     {
       id: "15",
       imageUrl: "./images/5.jpg",
-      text: "Нью-Йорк",
+      text: "15Нью-Йорк",
       description:
         "Нью-Йорк — город, который никогда не спит, финансовый и культурный центр США. Здесь вы найдете знаменитые районы, такие как Манхэттен и Бруклин, Бродвей, Центральный парк и множество музеев.",
       rating: 2,
@@ -173,18 +160,112 @@ const GridComponent = () => {
     {
       id: "20",
       imageUrl: "./images/10.jpg",
-      text: "Рио-де-Жанейро",
+      text: "20Рио-де-Жанейро",
       description:
         "Рио-де-Жанейро — город в Бразилии, известный своим карнавалом и красивыми пляжами, включая Копакабану и Ипанему. Ваш маршрут может включать посещение христа-искупителя, Сахарной головы и Сельарона.",
+      rating: 2,
+    },
+    {
+      id: "21",
+      imageUrl: "./images/10.jpg",
+      text: "10Рио-де-Жанейро",
+      description:
+        "Рио-де-Жанейро — город в Бразилии, известный своим карнавалом и красивыми пляжами, включая Копакабану и Ипанему. Ваш маршрут может включать посещение христа-искупителя, Сахарной головы и Сельарона.",
+      rating: 2,
+    },
+    {
+      id: "22",
+      imageUrl: "./images/1.jpg",
+      text: "11Москва",
+      description:
+        "Москва — столица России, крупнейший город страны и её политический, экономический, культурный и научный центр. Город расположен на реке Москве в центральной части России. Его история насчитывает более 800 лет. В поездке в Москву вы можете начать с Красной площади, посетить Кремль, прогуляться по Арбату и насладиться шедеврами Эрмитажа.",
+      rating: 3,
+    },
+    {
+      id: "23",
+      imageUrl: "./images/2.jpg",
+      text: "12Токио ночью",
+      description:
+        "Токио — столица и крупнейший город Японии. Это один из самых современных и захватывающих городов мира. Ночной Токио прекрасен своими яркими огоньками и атмосферой. Ваш маршрут может включать посещение района Шиндзюку, храма Асакуса, парка Уэно и торговой улицы Харадзуку.",
+      rating: 4,
+    },
+    {
+      id: "24",
+      imageUrl: "./images/3.jpg",
+      text: "13Сеул",
+      description:
+        "Сеул — столица и крупнейший город Южной Кореи. Этот город сочетает в себе современные технологии и богатое культурное наследие. Сеул известен своей динамичной атмосферой. Путешествие в Сеул может включать посещение дворца Гёнбоккун, башни Н-Соль и традиционного рынка Намдэмун.",
+      rating: 5,
+    },
+    {
+      id: "25",
+      imageUrl: "./images/4.jpg",
+      text: "14Париж",
+      description:
+        "Париж — столица Франции и один из культурных центров мира. Этот город известен своей романтичной атмосферой, прекрасной архитектурой и богатой историей. Ваш маршрут в Париже может включать посещение Эйфелевой башни, Лувра, Нотр-Дама и прогулку по набережной Сены.",
+      rating: 2,
+    },
+    {
+      id: "26",
+      imageUrl: "./images/5.jpg",
+      text: "15Нью-Йорк",
+      description:
+        "Нью-Йорк — город, который никогда не спит, финансовый и культурный центр США. Здесь вы найдете знаменитые районы, такие как Манхэттен и Бруклин, Бродвей, Центральный парк и множество музеев.",
+      rating: 2,
+    },
+    {
+      id: "27",
+      imageUrl: "./images/6.jpg",
+      text: "Лондон",
+      description:
+        "Лондон — столица Великобритании, город с богатой историей и культурой. Здесь вы сможете посетить такие исторические достопримечательности, как Букингемский дворец, Тауэрский мост, а также насладиться атмосферой Ковент-Гарден.",
+      rating: 2,
+    },
+    {
+      id: "28",
+      imageUrl: "./images/7.jpg",
+      text: "Берлин",
+      description:
+        "Берлин — столица Германии, современный и исторический город. Путешествие в Берлин может включать посещение Бранденбургских ворот, берлинской стены, музея остатков Берлинской стены и многих других интересных мест.",
+      rating: 2,
+    },
+    {
+      id: "29",
+      imageUrl: "./images/8.jpg",
+      text: "Рим",
+      description:
+        "Рим — столица Италии, город с богатой историей и архитектурой. Ваш маршрут в Риме может включать посещение Колизея, Римского форума, Пантеона и Сикстинской капеллы в Ватикане.",
+      rating: 2,
+    },
+    {
+      id: "30",
+      imageUrl: "./images/9.jpg",
+      text: "30Сидней",
+      description:
+        "Сидней — крупнейший город Австралии, известен своими красивыми пляжами, включая Бонди Бич и Манли. Здесь вы также можете посетить знаменитую оперу в Сиднее и восхитительный сад Ройял Ботаник.",
       rating: 2,
     },
     
   ]);
 
+  interface Card {
+    id: string;
+    imageUrl: string;
+    text: string;
+    description: string;
+    rating: number;
+  }
 
+  interface LayoutItem {
+    i: string;
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+    static: boolean;
+  }
 
-
-  const layoutConst = [
+  const layoutConst: LayoutItem[] = [
     { i: "1", x: 0, y: 0, w: 1, h: 1, static: true },
     { i: "2", x: 2, y: 0, w: 2, h: 1, static: true },
     { i: "3", x: 0, y: 1, w: 1, h: 1, static: true },
@@ -196,46 +277,50 @@ const GridComponent = () => {
     { i: "9", x: 1, y: 4, w: 1, h: 1, static: true },
     { i: "10", x: 2, y: 4, w: 1, h: 1, static: true },
   ];
+  const generateLayoutArray = (
+    layoutConst: LayoutItem[],
+    cardsLength: number
+  ): LayoutItem[] => {
+    const itemsPerRow = layoutConst.length;
+    const layoutsPerRow = Math.ceil(cardsLength / itemsPerRow);
 
-  function createLayoutFromCards(layoutConst, cards) {
-    const newLayout = [];
+    const repeatedLayoutConst = Array.from(
+      { length: layoutsPerRow },
+      (_, rowIndex) =>
+        layoutConst.map((item, colIndex) => ({
+          ...item,
+          i: `${rowIndex * itemsPerRow + colIndex + 1}`,
+          y: item.y + rowIndex * 5,
+        }))
+    ).flat();
 
-    for (let i = 0; i < cards.length; i++) {
-        const indexInLayoutConst = i % 10;
-        const layoutItem = { ...layoutConst[indexInLayoutConst], i: `${i + 1}` };
-        newLayout.push(layoutItem);
-    }
-
-    return newLayout;
-}
-  
-  const layout = createLayoutFromCards(layoutConst, cards);
-
-  const handleAddCard = () => {
-    const newCards = Array.from({ length: 10 }, (_, index) => {
-      const newIndex = cards.length + index + 1;
-      return {
-        id: `${newIndex}`,
-        imageUrl: `./images/${newIndex}.jpg`,
-        text: `New City ${newIndex}`,
-        description: `Description for New City ${newIndex}`,
-        rating: 1,
-      };
-    });
-
-    setCards((prevCards) => [...prevCards, ...newCards]);
+    return repeatedLayoutConst.slice(0, cardsLength);
   };
+
+
+
+  const [numCards, setNumCards] = useState(20);
+  const [layoutArray, setLayoutArray] = useState(
+    generateLayoutArray(layoutConst, numCards)
+  );
+
+  const handleLoadMore = () => {
+    const newNumCards = numCards + 10;
+    const newLayoutArray = generateLayoutArray(layoutConst, newNumCards);
+
+    setNumCards(newNumCards);
+    setLayoutArray(newLayoutArray);
+  };
+
   return (
-    
-    <CenteredContainer>
-      <GridContainer
+    <S.CenteredContainer>
+      <S.GridContainer
         className="layout"
-        layout={layout}
+        layout={layoutArray}
         cols={3}
         rowHeight={300}
         width={1000}>
-        
-        {cards.map((card) => (
+        {cards.slice(0, numCards).map((card) => (
           <div key={card.id}>
             <CardComponent
               imageUrl={card.imageUrl}
@@ -245,10 +330,9 @@ const GridComponent = () => {
             />
           </div>
         ))}
-      </GridContainer>
-      <button onClick={handleAddCard}>Add New Card</button>
-    </CenteredContainer>
+      </S.GridContainer>
+      <S.LoadMoreButton onClick={handleLoadMore}>Загрузить еще</S.LoadMoreButton>
+    </S.CenteredContainer>
   );
 };
-
 export default GridComponent;

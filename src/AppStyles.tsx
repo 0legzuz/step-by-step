@@ -45,6 +45,7 @@ const Colors = {
   light: "#f7f6ef",
   green: "#398897",
   dark: "#353743",
+  red: "#942F3F",
 };
 
 export const Container = styled.div`

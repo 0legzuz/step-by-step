@@ -55,3 +55,7 @@ export const LoginButton = styled(RegisterButton)`
   background-color: transparent;
   text-decoration: none;
 `;
+
+export const LogoutButton = styled(LoginButton)`
+  text-decoration: underline;
+`;
