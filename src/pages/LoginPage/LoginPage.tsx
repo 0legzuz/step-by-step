@@ -89,14 +89,43 @@ const toggleShowPassword = () => {
                   style={{
                     display: infoBoxVisible ? "block" : "none",
                   }}>
-                  пароль должен быть бла бла бла
+                  <div>
+                    <strong>Почта вида:</strong>
+                    <p>example@example.com</p>
+                  </div>
+
+                  <div>
+                    <strong>Логин:</strong>
+                    <ul>
+                      <li>Длина: 4-30 символов </li>
+                      <li>Допустимые символы:</li>
+                      <ul>
+                        <li>Буквы (верхний и нижний регистр): A-Z, a-z</li>
+                        <li>Цифры: 0-9</li>
+                        <li>Дополнительные символы: _, -</li>
+                      </ul>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <strong>Пароль:</strong>
+                    <ul>
+                      <li>Длина: 8-100 символов </li>
+                      <li>Допустимые символы:</li>
+                      <ul>
+                        <li>Буквы (верхний и нижний регистр): A-Z, a-z</li>
+                        <li>Цифры: 0-9</li>
+                        <li>
+                          Специальные символы: ! @ # $ % ^ & * ( ) _ + - =
+                          &#123; &#125; [ ] | ; : '” , . &lt; &gt; / ?
+                        </li>
+                      </ul>
+                    </ul>
+                  </div>
                 </S.InfoBox>
                 <S.InfoButton
                   onClick={handleInfoButtonClick}
-                  disabled={
-                    !passwordError &&
-                    !identifierError 
-                  }>
+                  disabled={!passwordError && !identifierError}>
                   i
                 </S.InfoButton>
               </div>

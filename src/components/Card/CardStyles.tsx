@@ -81,11 +81,25 @@ export const Image = styled.img`
   object-fit: cover; 
 `;
 
+export const FirstRow = styled.div`
+  display:flex;
+  flex-direction:row;
+  gap: 10px;  
+`;
 export const CardName = styled.p`
   font-size: 20px;
   font-weight: 400;
   padding-bottom: 10px;
 `;
+
+export const CardPrice = styled.p`
+  font-size: 20px;
+  font-weight: 400;
+  padding-bottom: 10px;
+  color: ${Colors.green};
+`;
+
+
 
 export const FullCircleIcon = styled.span`
   color: ${Colors.green};

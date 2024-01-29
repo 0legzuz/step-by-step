@@ -86,8 +86,9 @@ export const InfoButton = styled.button`
   background-color: transparent;
 `;
 export const InfoBox = styled.div`
-  height: 170px;
-  width: 170px;
+padding:10px;
+  height: 230px;
+  width: 230px;
   border-width: 2px;
   border-style: solid;
   position: absolute;
@@ -95,6 +96,8 @@ export const InfoBox = styled.div`
   z-index: 3;
   margin-left: 45px;
   color: ${Colors.red};
+  font-size:10px;
+  font-weight:400;
 
 `;
 

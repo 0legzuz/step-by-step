@@ -5,11 +5,13 @@ const CardComponent = ({
   text,
   rating,
   description,
+  price,
 }: {
   imageUrl: string;
   text: string;
   rating: number;
   description: string;
+  price:string
 }) => {
   const renderCircles = () => {
     const circles = [];
@@ -32,7 +34,10 @@ const CardComponent = ({
         <S.Image src={imageUrl} alt="Card Image" />
       </S.ImageBox>
       <S.Content>
-        <S.CardName>{text}</S.CardName>
+        <S.FirstRow>
+          <S.CardName>{text}</S.CardName>
+          <S.CardPrice>{price}</S.CardPrice>
+        </S.FirstRow>
         <S.InfoRow>
           <S.Avatar></S.Avatar>
           <S.RatingWrapper>{renderCircles()}</S.RatingWrapper>
