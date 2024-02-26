@@ -1,43 +1,15 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Colors from "./../../AppStyles";
-
-export const ShadowDrop = keyframes`
-  0% {
-    box-shadow: 
-    0 0 ${Colors.dark},
-     0 0 ${Colors.dark}, 
-     0 0 ${Colors.dark}, 
-     0 0 ${Colors.dark}, 
-     0 0 ${Colors.dark}, 
-     0 0 ${Colors.dark}, 
-     0 0 ${Colors.dark}, 
-     0 0 ${Colors.dark};
-    transform: translateX(0) translateY(0);
-  }
-  100% {
-    box-shadow: 
-    -0.5px 0.5px ${Colors.dark}, 
-    -1px 1px ${Colors.dark}, 
-    -1.5px 1.5px ${Colors.dark}, 
-    -2px 2px ${Colors.dark}, 
-    -2.5px 2.5px ${Colors.dark}, 
-    -3px 3px ${Colors.dark}, 
-    -3.5px 3.5px ${Colors.dark}, 
-    -4px 4px ${Colors.dark};
-    transform: translateX(4px) translateY(-4px);
-  }
-`;
 
 export const InfoRow = styled.div`
   display: flex;
-  gap :10px;
+  gap: 10px;
 
   align-items: center;
 `;
 export const RatingWrapper = styled.div`
   display: flex;
-  padding-bottom:3px;
-
+  padding-bottom: 3px;
 `;
 export const Avatar = styled.div`
   width: 20px;
@@ -54,11 +26,11 @@ export const ImageBox = styled.div`
 `;
 
 export const Nickname = styled.div`
-  margin-bottom:10px;
+  margin-bottom: 10px;
   font-size: 10px;
   color: ${Colors.dark};
-  font-weight:600;
-  text-decoration:underline;
+  font-weight: 600;
+  text-decoration: underline;
 `;
 
 export const Content = styled.div`
@@ -71,25 +43,27 @@ export const Content = styled.div`
   position: absolute;
   z-index: 1;
   bottom: 0;
-  transition: height 1s ease;
-  
+  width: 100%;
+  transition: height ${(props) => (props.isExpanded ? "1.75s" : "1s")} ease;
 `;
 
 export const Image = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
 `;
 
 export const FirstRow = styled.div`
-  display:flex;
-  flex-direction:row;
-  gap: 10px;  
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 `;
+
 export const CardName = styled.p`
   font-size: 20px;
   font-weight: 400;
   padding-bottom: 10px;
+  color: ${Colors.dark};
 `;
 
 export const CardPrice = styled.p`
@@ -98,8 +72,6 @@ export const CardPrice = styled.p`
   padding-bottom: 10px;
   color: ${Colors.green};
 `;
-
-
 
 export const FullCircleIcon = styled.span`
   color: ${Colors.green};
@@ -125,12 +97,11 @@ export const CardWrapper = styled.div`
   &:hover {
     ${Content} {
       height: 100%;
-      border-width: 2px;
       z-index: 1;
     }
-    animation: ${ShadowDrop} 0.5s cubic-bezier(0.47, 0, 0.745, 0.715) 0.6s both;
   }
 `;
+
 export const Description = styled.p`
   font-size: 14px;
   color: ${Colors.dark};

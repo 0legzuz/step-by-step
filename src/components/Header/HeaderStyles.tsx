@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Colors from "./../../AppStyles";
+import { NavLink } from "react-router-dom";
 
 
 export const HeaderWrapper = styled.header`
@@ -7,7 +8,7 @@ export const HeaderWrapper = styled.header`
   border-width: 0 0 2px 0;
   border-color: ${Colors.dark};
   padding: 10px;
-  display: flex;
+  display:flex;
   justify-content: space-between;
   align-items: center;
   background-color: ${Colors.light};
@@ -28,14 +29,16 @@ export const HeaderContent = styled.div`
 
 export const Navigation = styled.nav`
   margin-left: auto;
-  
 `;
 
-export const NavLink = styled.a`
+export const HeaderNavLink = styled(NavLink)`
   margin-left: 20px;
   font-weight: 500;
   font-size: 20px;
   color: ${Colors.dark};
+  &:hover {
+    color: ${Colors.green};
+  }
 `;
 
 export const RegisterButton = styled.button`
@@ -45,15 +48,19 @@ export const RegisterButton = styled.button`
   font-family: "Manrope", sans-serif;
   background-color: transparent;
   border: none;
-
   font-size: 20px;
+  margin-left: 20px;
+  &:hover {
+    color: ${Colors.green};
+  }
 `;
+
 export const LoginButton = styled(RegisterButton)`
-  margin-right: 20px;
   margin-left: 20px;
   font-weight: 600;
   background-color: transparent;
   text-decoration: none;
+  
 `;
 
 export const LogoutButton = styled(LoginButton)`

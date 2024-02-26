@@ -1,5 +1,5 @@
 import { Container } from "../AppStyles";
-import FooterComponent from "../components/Card/Footer/Footer";
+import FooterComponent from "../components/Footer/Footer";
 import GridComponent from "../components/GridCards/GridCards.tsx/GridCards";
 import HeaderComponent from "../components/Header/Header";
 

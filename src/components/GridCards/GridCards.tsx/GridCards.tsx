@@ -1,288 +1,165 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardComponent from "../../Card/Card";
 import * as S from "./GridCardsStyles";
+import { getCards } from "../../../api";
 
 const GridComponent: React.FC = () => {
-  const [cards] = useState<Card[]>([
-    {
-      id: "1",
-      imageUrl: "./images/1.jpg",
-      text: "Москва",
-      description:
-        "Москва — столица России, крупнейший город страны и её политический, экономический, культурный и научный центр. Город расположен на реке Москве в центральной части России. Его история насчитывает более 800 лет. В поездке в Москву вы можете начать с Красной площади, посетить Кремль, прогуляться по Арбату и насладиться шедеврами Эрмитажа.",
-      rating: 3,
-      price: "10₽",
-    },
-    {
-      id: "2",
-      imageUrl: "./images/2.jpg",
-      text: "Токио ночью",
-      description:
-        "Токио — столица и крупнейший город Японии. Это один из самых современных и захватывающих городов мира. Ночной Токио прекрасен своими яркими огоньками и атмосферой. Ваш маршрут может включать посещение района Шиндзюку, храма Асакуса, парка Уэно и торговой улицы Харадзуку.",
-      rating: 4,
-      price: "10₽",
-    },
-    {
-      id: "3",
-      imageUrl: "./images/3.jpg",
-      text: "Сеул",
-      description:
-        "Сеул — столица и к₽упнейший город Южной Кореи. Этот город сочетает в себе современные технологии и богатое культурное наследие. Сеул известен своей динамичной атмосферой. Путешествие в Сеул может включать посещение дворца Гёнбоккун, башни Н-Соль и традиционного рынка Намдэмун.",
-      rating: 5,
-      price: "10₽",
-    },
-    {
-      id: "4",
-      imageUrl: "./images/4.jpg",
-      text: "Париж",
-      description:
-        "Париж — столица Франции и один из культурных центров мира. Этот город известен своей романтичной атмосферой, прекрасной архитектурой и богатой историей. Ваш маршрут в Париже может включать посещение Эйфелевой башни, Лувра, Нотр-Дама и прогулку по набережной Сены.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "5",
-      imageUrl: "./images/5.jpg",
-      text: "Нью-Йорк",
-      description:
-        "Нью-Йорк — город, который никогда не спит, финансовый и культурный центр США. Здесь вы найдете знаменитые районы, такие как Манхэттен и Бруклин, Бродвей, Центральный парк и множество музеев.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "6",
-      imageUrl: "./images/6.jpg",
-      text: "Лондон",
-      description:
-        "Лондон — столица Великобритании, город с богатой историей и культурой. Здесь вы сможете посетить такие исторические достопримечательности, как Букингемский дворец, Тауэрский мост, а также насладиться атмосферой Ковент-Гарден.",
-      rating: 2,
-      price: "10Р",
-    },
-    {
-      id: "7",
-      imageUrl: "./images/7.jpg",
-      text: "Берлин",
-      description:
-        "Берлин — столица Германии, современный и исторический город. Путешествие в Берлин может включать посещение Бранденбургских ворот, берлинской стены, музея остатков Берлинской стены и многих других интересных мест.",
-      rating: 2,
-      price:"Free"
-    },
-    {
-      id: "8",
-      imageUrl: "./images/8.jpg",
-      text: "Рим",
-      description:
-        "Рим — столица Италии, город с богатой историей и архитектурой. Ваш маршрут в Риме может включать посещение Колизея, Римского форума, Пантеона и Сикстинской капеллы в Ватикане.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "9",
-      imageUrl: "./images/9.jpg",
-      text: "Сидней",
-      description:
-        "Сидней — крупнейший город Австралии, известен своими красивыми пляжами, включая Бонди Бич и Манли. Здесь вы также можете посетить знаменитую оперу в Сиднее и восхитительный сад Ройял Ботаник.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "10",
-      imageUrl: "./images/10.jpg",
-      text: "Рио-де-Жанейро",
-      description:
-        "Рио-де-Жанейро — город в Бразилии, известный своим карнавалом и красивыми пляжами, включая Копакабану и Ипанему. Ваш маршрут может включать посещение христа-искупителя, Сахарной головы и Сельарона.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "11",
-      imageUrl: "./images/1.jpg",
-      text: "Москва",
-      description:
-        "Москва — столица России, крупнейший город страны и её политический, экономический, культурный и научный центр. Город расположен на реке Москве в центральной части России. Его история насчитывает более 800 лет. В поездке в Москву вы можете начать с Красной площади, посетить Кремль, прогуляться по Арбату и насладиться шедеврами Эрмитажа.",
-      rating: 3,
-      price: "10₽",
-    },
-    {
-      id: "12",
-      imageUrl: "./images/2.jpg",
-      text: "12Токио ночью",
-      description:
-        "Токио — столица и крупнейший город Японии. Это один из самых современных и захватывающих городов мира. Ночной Токио прекрасен своими яркими огоньками и атмосферой. Ваш маршрут может включать посещение района Шиндзюку, храма Асакуса, парка Уэно и торговой улицы Харадзуку.",
-      rating: 4,
-      price: "10₽",
-    },
-    {
-      id: "13",
-      imageUrl: "./images/3.jpg",
-      text: "13Сеул",
-      description:
-        "Сеул — столица и крупнейший город Южной Кореи. Этот город сочетает в себе современные технологии и богатое культурное наследие. Сеул известен своей динамичной атмосферой. Путешествие в Сеул может включать посещение дворца Гёнбоккун, башни Н-Соль и традиционного рынка Намдэмун.",
-      rating: 5,
-      price: "10₽",
-    },
-    {
-      id: "14",
-      imageUrl: "./images/4.jpg",
-      text: "14Париж",
-      description:
-        "Париж — столица Франции и один из культурных центров мира. Этот город известен своей романтичной атмосферой, прекрасной архитектурой и богатой историей. Ваш маршрут в Париже может включать посещение Эйфелевой башни, Лувра, Нотр-Дама и прогулку по набережной Сены.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "15",
-      imageUrl: "./images/5.jpg",
-      text: "15Нью-Йорк",
-      description:
-        "Нью-Йорк — город, который никогда не спит, финансовый и культурный центр США. Здесь вы найдете знаменитые районы, такие как Манхэттен и Бруклин, Бродвей, Центральный парк и множество музеев.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "16",
-      imageUrl: "./images/6.jpg",
-      text: "Лондон",
-      description:
-        "Лондон — столица Великобритании, город с богатой историей и культурой. Здесь вы сможете посетить такие исторические достопримечательности, как Букингемский дворец, Тауэрский мост, а также насладиться атмосферой Ковент-Гарден.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "17",
-      imageUrl: "./images/7.jpg",
-      text: "Берлин",
-      description:
-        "Берлин — столица Германии, современный и исторический город. Путешествие в Берлин может включать посещение Бранденбургских ворот, берлинской стены, музея остатков Берлинской стены и многих других интересных мест.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "18",
-      imageUrl: "./images/8.jpg",
-      text: "Рим",
-      description:
-        "Рим — столица Италии, город с богатой историей и архитектурой. Ваш маршрут в Риме может включать посещение Колизея, Римского форума, Пантеона и Сикстинской капеллы в Ватикане.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "19",
-      imageUrl: "./images/9.jpg",
-      text: "Сидней",
-      description:
-        "Сидней — крупнейший город Австралии, известен своими красивыми пляжами, включая Бонди Бич и Манли. Здесь вы также можете посетить знаменитую оперу в Сиднее и восхитительный сад Ройял Ботаник.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "20",
-      imageUrl: "./images/10.jpg",
-      text: "20Рио-де-Жанейро",
-      description:
-        "Рио-де-Жанейро — город в Бразилии, известный своим карнавалом и красивыми пляжами, включая Копакабану и Ипанему. Ваш маршрут может включать посещение христа-искупителя, Сахарной головы и Сельарона.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "21",
-      imageUrl: "./images/10.jpg",
-      text: "10Рио-де-Жанейро",
-      description:
-        "Рио-де-Жанейро — город в Бразилии, известный своим карнавалом и красивыми пляжами, включая Копакабану и Ипанему. Ваш маршрут может включать посещение христа-искупителя, Сахарной головы и Сельарона.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "22",
-      imageUrl: "./images/1.jpg",
-      text: "11Москва",
-      description:
-        "Москва — столица России, крупнейший город страны и её политический, экономический, культурный и научный центр. Город расположен на реке Москве в центральной части России. Его история насчитывает более 800 лет. В поездке в Москву вы можете начать с Красной площади, посетить Кремль, прогуляться по Арбату и насладиться шедеврами Эрмитажа.",
-      rating: 3,
-      price: "10₽",
-    },
-    {
-      id: "23",
-      imageUrl: "./images/2.jpg",
-      text: "12Токио ночью",
-      description:
-        "Токио — столица и крупнейший город Японии. Это один из самых современных и захватывающих городов мира. Ночной Токио прекрасен своими яркими огоньками и атмосферой. Ваш маршрут может включать посещение района Шиндзюку, храма Асакуса, парка Уэно и торговой улицы Харадзуку.",
-      rating: 4,
-      price: "10₽",
-    },
-    {
-      id: "24",
-      imageUrl: "./images/3.jpg",
-      text: "13Сеул",
-      description:
-        "Сеул — столица и крупнейший город Южной Кореи. Этот город сочетает в себе современные технологии и богатое культурное наследие. Сеул известен своей динамичной атмосферой. Путешествие в Сеул может включать посещение дворца Гёнбоккун, башни Н-Соль и традиционного рынка Намдэмун.",
-      rating: 5,
-      price: "10₽",
-    },
-    {
-      id: "25",
-      imageUrl: "./images/4.jpg",
-      text: "14Париж",
-      description:
-        "Париж — столица Франции и один из культурных центров мира. Этот город известен своей романтичной атмосферой, прекрасной архитектурой и богатой историей. Ваш маршрут в Париже может включать посещение Эйфелевой башни, Лувра, Нотр-Дама и прогулку по набережной Сены.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "26",
-      imageUrl: "./images/5.jpg",
-      text: "15Нью-Йорк",
-      description:
-        "Нью-Йорк — город, который никогда не спит, финансовый и культурный центр США. Здесь вы найдете знаменитые районы, такие как Манхэттен и Бруклин, Бродвей, Центральный парк и множество музеев.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "27",
-      imageUrl: "./images/6.jpg",
-      text: "Лондон",
-      description:
-        "Лондон — столица Великобритании, город с богатой историей и культурой. Здесь вы сможете посетить такие исторические достопримечательности, как Букингемский дворец, Тауэрский мост, а также насладиться атмосферой Ковент-Гарден.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "28",
-      imageUrl: "./images/7.jpg",
-      text: "Берлин",
-      description:
-        "Берлин — столица Германии, современный и исторический город. Путешествие в Берлин может включать посещение Бранденбургских ворот, берлинской стены, музея остатков Берлинской стены и многих других интересных мест.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "29",
-      imageUrl: "./images/8.jpg",
-      text: "Рим",
-      description:
-        "Рим — столица Италии, город с богатой историей и архитектурой. Ваш маршрут в Риме может включать посещение Колизея, Римского форума, Пантеона и Сикстинской капеллы в Ватикане.",
-      rating: 2,
-      price: "10₽",
-    },
-    {
-      id: "30",
-      imageUrl: "./images/9.jpg",
-      text: "30Сидней",
-      description:
-        "Сидней — крупнейший город Австралии, известен своими красивыми пляжами, включая Бонди Бич и Манли. Здесь вы также можете посетить знаменитую оперу в Сиднее и восхитительный сад Ройял Ботаник.",
-      rating: 2,
-      price: "10₽",
-    },
+  const [cards, setCards] = useState<Card[]>([
+    
   ]);
+
+  useEffect(() => {
+    // Запросите начальные карты при монтировании компонента
+    const fetchCards = async () => {
+      try {
+        const data = await getCards();
+        setCards(data);
+      } catch (error) {
+        console.error("Ошибка при получении карточек:", error);
+      }
+    };
+
+    fetchCards();
+  }, []);
 
   interface Card {
     id: string;
-    imageUrl: string;
-    text: string;
+    preview_image: string;
     description: string;
-    rating: number;
-    price: string;
+    title: string;
+    content: { type: string; data: string }[];
+    owner_id: string;
+    images_id: string[];
+    reactions_info: number;
+    date: string;
+  }
+
+  // // Пример карточек
+  // const cards: Card[] = [
+    // {
+    //   id: "вававаываыа",
+    //   preview_image: "image1.jpg",
+    //   description: "Description 1",
+    //   title: "T1212",
+    //   content: [{ type: "text", data: "Content 1" }],
+    //   owner_id: "user1",
+    //   images_id: ["image1"],
+    //   reactions_info: 0,
+    //   date: "2024-02-08",
+    // },
+  //   {
+  //     id: "ываыавыаыа",
+  //     preview_image: "image2.jpg",
+  //     description: "Description 2",
+  //     title: "T21222222",
+  //     content: [{ type: "text", data: "Content 2" }],
+  //     owner_id: "user2",
+  //     images_id: ["image2"],
+  //     reactions_info: 0,
+  //     date: "2024-02-08",
+  //   },
+  //   {
+  //     id: "11",
+  //     preview_image: "image2.jpg",
+  //     description: "Description 2",
+  //     title: "Title 2",
+  //     content: [{ type: "text", data: "Content 2" }],
+  //     owner_id: "user2",
+  //     images_id: ["image2"],
+  //     reactions_info: 0,
+  //     date: "2024-02-08",
+  //   },
+  //   {
+  //     id: "11",
+  //     preview_image: "image2.jpg",
+  //     description: "Description 2",
+  //     title: "Title 2",
+  //     content: [{ type: "text", data: "Content 2" }],
+  //     owner_id: "user2",
+  //     images_id: ["image2"],
+  //     reactions_info: 0,
+  //     date: "2024-02-08",
+  //   },
+    // {
+    //   id: "5",
+    //   preview_image: "image2.jpg",
+    //   description: "Description 2",
+    //   title: "Title 2",
+    //   content: [{ type: "text", data: "Content 2" }],
+    //   owner_id: "user2",
+    //   images_id: ["image2"],
+    //   reactions_info: 0,
+    //   date: "2024-02-08",
+    // },
+    // {
+    //   id: "6",
+    //   preview_image: "image2.jpg",
+    //   description: "Description 2",
+    //   title: "Title 2",
+    //   content: [{ type: "text", data: "Content 2" }],
+    //   owner_id: "user2",
+    //   images_id: ["image2"],
+    //   reactions_info: 0,
+    //   date: "2024-02-08",
+    // },
+    // {
+    //   id: "7",
+    //   preview_image: "image2.jpg",
+    //   description: "Description 2",
+    //   title: "Title 2",
+    //   content: [{ type: "text", data: "Content 2" }],
+    //   owner_id: "user2",
+    //   images_id: ["image2"],
+    //   reactions_info: 0,
+    //   date: "2024-02-08",
+    // },
+    // // {
+    //   id: "8",
+    //   preview_image: "image2.jpg",
+    //   description: "Description 2",
+    //   title: "Title 2",
+    //   content: [{ type: "text", data: "Content 2" }],
+    //   owner_id: "user2",
+    //   images_id: ["image2"],
+    //   reactions_info: 0,
+    //   date: "2024-02-08",
+    // },
+    // {
+    //   id: "9",
+    //   preview_image: "image2.jpg",
+    //   description: "Description 2",
+    //   title: "Title 2",
+    //   content: [{ type: "text", data: "Content 2" }],
+    //   owner_id: "user2",
+    //   images_id: ["image2"],
+    //   reactions_info: 0,
+    //   date: "2024-02-08",
+    // },
+    // {
+    //   id: "10",
+    //   preview_image: "image2.jpg",
+    //   description: "Description 2",
+    //   title: "Title 2",
+    //   content: [{ type: "text", data: "Content 2" }],
+    //   owner_id: "user2",
+    //   images_id: ["image2"],
+    //   reactions_info: 0,
+    //   date: "2024-02-08",
+    // },
+
+    // Добавьте другие карточки по аналогии
+  // ];
+
+  interface Card {
+    id: string;
+    preview_image: string;
+    description: string;
+    title: string;
+    content: { type: string; data: string }[];
+    owner_id: string;
+    images_id: string[];
+    reactions_info: number;
+    date: string;
   }
 
   interface LayoutItem {
@@ -294,18 +171,6 @@ const GridComponent: React.FC = () => {
     static: boolean;
   }
 
-  const layoutConst: LayoutItem[] = [
-    { i: "1", x: 0, y: 0, w: 1, h: 1, static: true },
-    { i: "2", x: 2, y: 0, w: 2, h: 1, static: true },
-    { i: "3", x: 0, y: 1, w: 1, h: 1, static: true },
-    { i: "4", x: 1, y: 1, w: 2, h: 2, static: true },
-    { i: "5", x: 0, y: 2, w: 1, h: 2, static: true },
-    { i: "6", x: 1, y: 3, w: 1, h: 1, static: true },
-    { i: "7", x: 2, y: 3, w: 1, h: 1, static: true },
-    { i: "8", x: 0, y: 4, w: 1, h: 1, static: true },
-    { i: "9", x: 1, y: 4, w: 1, h: 1, static: true },
-    { i: "10", x: 2, y: 4, w: 1, h: 1, static: true },
-  ];
   const generateLayoutArray = (
     layoutConst: LayoutItem[],
     cardsLength: number
@@ -326,42 +191,47 @@ const GridComponent: React.FC = () => {
     return repeatedLayoutConst.slice(0, cardsLength);
   };
 
-  const [numCards, setNumCards] = useState(20);
-  const [layoutArray, setLayoutArray] = useState(
-    generateLayoutArray(layoutConst, numCards)
-  );
+  // Пример использования
+  const layoutTemplate: LayoutItem[] = [
+    { i: "1", x: 0, y: 0, w: 1, h: 1, static: true },
+    { i: "2", x: 2, y: 0, w: 2, h: 1, static: true },
+    { i: "3", x: 0, y: 1, w: 1, h: 1, static: true },
+    { i: "4", x: 1, y: 1, w: 2, h: 2, static: true },
+    { i: "5", x: 0, y: 2, w: 1, h: 2, static: true },
+    { i: "6", x: 1, y: 3, w: 1, h: 1, static: true },
+    { i: "7", x: 2, y: 3, w: 1, h: 1, static: true },
+    { i: "8", x: 0, y: 4, w: 1, h: 1, static: true },
+    { i: "9", x: 1, y: 4, w: 1, h: 1, static: true },
+    { i: "10", x: 2, y: 4, w: 1, h: 1, static: true },
+  ];
 
-  const handleLoadMore = () => {
-    const newNumCards = numCards + 10;
-    const newLayoutArray = generateLayoutArray(layoutConst, newNumCards);
+  const generatedLayout = generateLayoutArray(layoutTemplate, cards.length);
+console.log(cards);
 
-    setNumCards(newNumCards);
-    setLayoutArray(newLayoutArray);
-  };
+
 
   return (
     <S.CenteredContainer>
       <S.GridContainer
         className="layout"
-        layout={layoutArray}
+        layout={generatedLayout}
         cols={3}
         rowHeight={300}
         width={1000}>
-        {cards.slice(0, numCards).map((card) => (
-          <div key={card.id}>
+        {cards.map((card) => (
+          <div key={`${cards.indexOf(card) + 1}`}>
             <CardComponent
-              imageUrl={card.imageUrl}
-              text={card.text}
-              rating={card.rating}
+              imageUrl={card.preview_image}
+              text={card.title}
+              rating={card.reactions_info}
               description={card.description}
-              price={card.price}
+              price="1"
+
             />
           </div>
         ))}
       </S.GridContainer>
-      <S.LoadMoreButton onClick={handleLoadMore}>
-        Загрузить еще
-      </S.LoadMoreButton>
+      <S.LoadMoreButton>Загрузить еще</S.LoadMoreButton>
     </S.CenteredContainer>
   );
 };

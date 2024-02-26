@@ -1,7 +1,10 @@
+import React, { useState, useEffect } from "react";
 import * as S from "./HeaderStyles";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 const HeaderComponent: React.FC = () => {
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+
   // Проверяем статус регистрации
   const registrationStatus = localStorage.getItem("registrationStatus");
 
@@ -13,24 +16,54 @@ const HeaderComponent: React.FC = () => {
     window.location.href = "/";
   };
 
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    const handleScroll = () => {
+      clearTimeout(timeoutId);
+
+      if (window.scrollY > 80) {
+        timeoutId = setTimeout(() => {
+          setIsHeaderVisible(false);
+        }, 3000);
+      } else {
+        setIsHeaderVisible(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
   return (
-    <S.HeaderWrapper>
+    <S.HeaderWrapper
+      style={{
+        transform: isHeaderVisible ? "translateY(0)" : "translateY(-100%)",
+        transition: "transform 0.3s ease-in-out",
+      }}>
       <S.HeaderContent>
-        <S.Logo src="./../logo.svg" alt="Logo" />
+        <Link to="/">
+          <S.Logo src="./../logo.svg" alt="Logo" />
+        </Link>
       </S.HeaderContent>
 
       {registrationStatus === "success" ? (
         <>
           <S.Navigation>
-            <S.NavLink href="/">О нас</S.NavLink>
+            <S.HeaderNavLink to="/new-card">Создать</S.HeaderNavLink>
+            <S.HeaderNavLink to="/">Профиль</S.HeaderNavLink>
           </S.Navigation>
           <S.LogoutButton onClick={handleLogout}>Выйти</S.LogoutButton>
         </>
       ) : (
         <>
           <S.Navigation>
-            <S.NavLink href="/">О нас</S.NavLink>
-            <S.NavLink href="/">Профиль</S.NavLink>
+            <S.HeaderNavLink to="/">О нас</S.HeaderNavLink>
+            <S.HeaderNavLink to="/">Профиль</S.HeaderNavLink>
           </S.Navigation>
 
           <Link to="/login">

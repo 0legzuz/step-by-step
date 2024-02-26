@@ -51,17 +51,19 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import MainPage from "./pages/MainPage";
 import IdPage from "./pages/IdPage/IdPage";
+import CardPage from "./pages/CardPage/CardPage";
+import NewCardPage from "./pages/NewCardPage/NewC/NewCardPage";
 
 export const AppRoutes = () => {
   return (
-    
-      <Routes>
-        <Route path="/" element={<MainPage />} index />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/user/:userId" element={<IdPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-   
+    <Routes>
+      <Route path="/" element={<MainPage />} index />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/user/:userId" element={<IdPage />} />
+      <Route path="/card/:cardId" element={<CardPage />} />
+      <Route path="/new-card" element={<NewCardPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 };

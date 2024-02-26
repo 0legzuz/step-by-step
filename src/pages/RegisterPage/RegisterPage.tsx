@@ -52,7 +52,7 @@ const RegisterPage: React.FC = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const newValue = event.target.value;
-    setSecondPassword(newValue); // Update the state variable for the second password
+    setSecondPassword(newValue);
 
     if (password !== newValue) {
       setSecondPasswordError(true);
@@ -253,7 +253,8 @@ const RegisterPage: React.FC = () => {
                     !isEmailValid ||
                     !password ||
                     !username ||
-                    !email
+                    !email ||
+                    secondPasswordError 
                   }>
                   Зарегистрироваться
                 </S.RegisterButton>

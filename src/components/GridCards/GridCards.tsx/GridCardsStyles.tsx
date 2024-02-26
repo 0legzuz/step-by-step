@@ -16,7 +16,7 @@ export const CenteredContainer = styled.div`
 `;
 export const LoadMoreButton = styled.button`
   padding: 10px;
-  margin: 20px;
+  margin:20px 20px 100px 20px;
   color: ${Colors.dark};
   font-weight: 600;
   text-decoration: underline;

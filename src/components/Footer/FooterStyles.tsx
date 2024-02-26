@@ -1,16 +1,20 @@
-// FooterStyles.ts
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
   background-color: #333;
   color: #fff;
-  padding: 20px;
+  padding: 10px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+
 `;
 
 export const FooterContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  justify-content: center;
 `;
 
 export const FooterLinks = styled.nav`
@@ -19,15 +23,13 @@ export const FooterLinks = styled.nav`
 `;
 
 export const FooterLink = styled.div`
-  font-size: 16px;
-
   a {
     color: #fff;
     text-decoration: none;
 
     svg {
-      width: 24px;
-      height: 24px;
+      width: 30px;
+      height: 30px;
     }
   }
 `;
@@ -49,6 +51,8 @@ export const FooterSocialMedia = styled.div`
 `;
 
 export const FooterDisclaimer = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 14px;
+  display: flex;
+  justify-content: center;
 `;
