@@ -28,11 +28,21 @@ export const Name = styled.div`
 export const StyledFileInput = styled.div`
   display: inline-block;
   position: relative;
-  
 `;
 
 export const FileInput = styled.input`
   display: none;
+`;
+
+export const PreviewRow = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const PreviewColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100px;
 `;
 
 export const CustomFileLabel = styled.label`
@@ -41,6 +51,7 @@ export const CustomFileLabel = styled.label`
   background-color: ${Colors.dark};
   color: ${Colors.light};
   cursor: pointer;
+  width: 200px;
   &: hover {
     background-color: ${Colors.green};
   }
@@ -54,9 +65,9 @@ export const ImageText = styled.p`
 `;
 
 export const ImagePreview = styled.img`
-  max-width: 100px;
-  max-height: 100px;
-
+  max-width: 200px;
+  max-height: 200px;
+  margin-left: 10px;
 `;
 
 export const ShortDescription = styled.div`
@@ -112,8 +123,8 @@ export const FormButton = styled.button`
   padding: 9px;
   border: none;
   cursor: pointer;
-  margin: 9px;
-  width:auto;
+  margin: 9px 9px 9px 0;
+  width: auto;
   &:hover {
     background-color: ${Colors.dark};
   }

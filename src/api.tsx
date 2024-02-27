@@ -1,4 +1,4 @@
-const apiUrl = "https://3e37-217-107-127-252.ngrok-free.app";
+const apiUrl = "https://1a95-193-233-66-37.ngrok-free.app";
 
 const currentTokenType = "Bearer";
 
@@ -193,7 +193,7 @@ async function createCard(cardData, accessToken, tokenType) {
       headers: new Headers({
         "ngrok-skip-browser-warning": "69420",
         "authorization-": `${tokenType} ${accessToken}`,
-        "Content-Type": "application/json", 
+        "Content-Type": "application/json",
       }),
       body: JSON.stringify(cardData),
     });

@@ -81,50 +81,51 @@ const CardForm: React.FC<FormProps> = ({ onSubmit }) => {
     setFormData({ ...formData, content: newContent });
   };
 
- const handleImageUpload = async (
-   type: string,
-   e: React.ChangeEvent<HTMLInputElement>,
-   formIndex: number
- ) => {
-   const file = e.target.files?.[0];
-   const currentAccessToken = localStorage.getItem("token");
-   const currentTokenType = "Bearer";
+  const handleImageUpload = async (
+    type: string,
+    e: React.ChangeEvent<HTMLInputElement>,
+    formIndex: number
+  ) => {
+    const file = e.target.files?.[0];
+    const currentAccessToken = localStorage.getItem("token");
+    const currentTokenType = "Bearer";
+    console.log(currentAccessToken);
 
-   if (file) {
-     try {
-       const imageUrl = await uploadImage(
-         file,
-         currentAccessToken,
-         currentTokenType
-       );
+    if (file) {
+      try {
+        const imageUrl = await uploadImage(
+          file,
+          currentAccessToken,
+          currentTokenType
+        );
 
-       const updatedFileStates = [...fileStates];
-       updatedFileStates[formIndex] = { selectedFile: file };
-       setFileStates(updatedFileStates);
+        const updatedFileStates = [...fileStates];
+        updatedFileStates[formIndex] = { selectedFile: file };
+        setFileStates(updatedFileStates);
 
-       if (type === "preview") {
-         setFormData((prevFormData) => ({
-           ...prevFormData,
-           preview_image: imageUrl,
-         }));
-       } else {
-         setFormData((prevFormData) => {
-           const updatedContent = [...prevFormData.content];
-           updatedContent[formIndex] = {
-             type: "image",
-             data: { preview_image: imageUrl, selectedFile: file },
-           };
-           return {
-             ...prevFormData,
-             content: updatedContent,
-           };
-         });
-       }
-     } catch (error) {
-       console.error(error.message);
-     }
-   }
- };
+        if (type === "preview") {
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            preview_image: imageUrl,
+          }));
+        } else {
+          setFormData((prevFormData) => {
+            const updatedContent = [...prevFormData.content];
+            updatedContent[formIndex] = {
+              type: "image",
+              data: { preview_image: imageUrl, selectedFile: file },
+            };
+            return {
+              ...prevFormData,
+              content: updatedContent,
+            };
+          });
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+  };
 
   const handleCreateCard = async () => {
     const currentAccessToken = localStorage.getItem("token");
@@ -162,25 +163,30 @@ const CardForm: React.FC<FormProps> = ({ onSubmit }) => {
                     accept="image/*"
                     onChange={(e) => handleImageUpload("preview", e, 0)}
                   />
-                  <S.CustomFileLabel htmlFor="imageInput">
-                    Выберите изображение
-                  </S.CustomFileLabel>
-                  {fileStates[0]?.selectedFile && (
-                    <S.ImagePreview
-                      src={URL.createObjectURL(fileStates[0]?.selectedFile)}
-                      alt="Preview"
-                    />
-                  )}
-                  {fileStates[0]?.selectedFile ? (
-                    <S.ImageText style={{ color: `${Colors.green}` }}>
-                      {" "}
-                      Файл {fileStates[0]?.selectedFile.name} загружен
-                    </S.ImageText>
-                  ) : (
-                    <S.ImageText style={{ color: `${Colors.red}` }}>
-                      Файл не загружен
-                    </S.ImageText>
-                  )}
+                  <S.PreviewRow>
+                    <S.PreviewColumn>
+                      <S.CustomFileLabel htmlFor="imageInput">
+                        Выберите изображение
+                      </S.CustomFileLabel>
+                      {fileStates[0]?.selectedFile ? (
+                        <S.ImageText style={{ color: `${Colors.green}` }}>
+                          {" "}
+                          Файл {fileStates[0]?.selectedFile.name} загружен
+                        </S.ImageText>
+                      ) : (
+                        <S.ImageText style={{ color: `${Colors.red}` }}>
+                          Файл не загружен
+                        </S.ImageText>
+                      )}
+                    </S.PreviewColumn>
+
+                    {fileStates[0]?.selectedFile && (
+                      <S.ImagePreview
+                        src={URL.createObjectURL(fileStates[0]?.selectedFile)}
+                        alt="Preview"
+                      />
+                    )}
+                  </S.PreviewRow>
                 </S.StyledFileInput>
               </S.Name>
 
@@ -223,33 +229,40 @@ const CardForm: React.FC<FormProps> = ({ onSubmit }) => {
                     </S.DeleteButton>
                   </S.FormRow>
                   <S.StyledFileInput>
-                    <S.FileInput
-                      id={`imageInput_${index}`}
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleImageUpload("image", e, index)}
-                    />
-                    <S.CustomFileLabel htmlFor={`imageInput_${index}`}>
-                      Выберите изображение
-                    </S.CustomFileLabel>
-                    {fileStates[index]?.selectedFile && (
-                      <S.ImagePreview
-                        src={URL.createObjectURL(
-                          fileStates[index]?.selectedFile
+                    <S.PreviewRow>
+                      <S.PreviewColumn>
+                        <S.FileInput
+                          id={`imageInput_${index}`}
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => handleImageUpload("image", e, index)}
+                        />
+
+                        <S.CustomFileLabel htmlFor={`imageInput_${index}`}>
+                          Выберите изображение
+                        </S.CustomFileLabel>
+
+                        {fileStates[index]?.selectedFile ? (
+                          <S.ImageText style={{ color: `${Colors.green}` }}>
+                            {" "}
+                            Файл {fileStates[index]?.selectedFile.name} загружен
+                          </S.ImageText>
+                        ) : (
+                          <S.ImageText style={{ color: `${Colors.red}` }}>
+                            Файл не загружен
+                          </S.ImageText>
                         )}
-                        alt="Preview"
-                      />
-                    )}
-                    {fileStates[index]?.selectedFile ? (
-                      <S.ImageText style={{ color: `${Colors.green}` }}>
-                        {" "}
-                        Файл {fileStates[index]?.selectedFile.name} загружен
-                      </S.ImageText>
-                    ) : (
-                      <S.ImageText style={{ color: `${Colors.red}` }}>
-                        Файл не загружен
-                      </S.ImageText>
-                    )}
+                      </S.PreviewColumn>
+
+                      {fileStates[index]?.selectedFile && (
+                        <S.ImagePreview
+                          src={URL.createObjectURL(
+                            fileStates[index]?.selectedFile
+                          )}
+                          alt="Preview"
+                        />
+                      )}
+                    </S.PreviewRow>
                   </S.StyledFileInput>
                 </S.ContentImageBox>
               ) : contentItem.type === "header" ? (
