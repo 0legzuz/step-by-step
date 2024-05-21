@@ -1,30 +1,74 @@
-# React + TypeScript + Vite
+Step
+Описание проекта
+"Step" - это сайт, который позволяет пользователям выкладывать подробные маршруты своих путешествий. Маршруты публикуются в формате карточек, при переходе по которым можно посмотреть весь маршрут. Концепция сайта заключается в том, чтобы человек, который редко путешествует, смог шаг за шагом повторить маршрут опытного путешественника.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Основной функционал
+Профили пользователей: Регистрация и создание профилей.
+Карточки путешествий: Возможность выкладывать карточки с путешествиями, включающие фото, карты и текст.
+Отзывы и рейтинги: Добавление отзывов, рейтинг маршрутов и пользователей.
+Продажа маршрутов: Возможность продавать свои маршруты другим пользователям.
+Поиск маршрутов: Фильтрация маршрутов по различным параметрам.
+Технологии
+Фронт-енд часть проекта написана с использованием следующих технологий:
 
-Currently, two official plugins are available:
+Vite: Инструмент для сборки проекта.
+React: Библиотека для построения пользовательских интерфейсов.
+TSX: Расширение синтаксиса TypeScript для использования JSX.
+StyledComponents: Библиотека для стилизации компонентов в React.
+Установка и запуск
+Предварительные требования
+Node.js версии 14.0 или выше
+npm или yarn
+Установка зависимостей
+Клонируйте репозиторий:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+bash
+Копировать код
+git clone https://github.com/yourusername/step.git
+cd step
+Установите зависимости:
 
-## Expanding the ESLint configuration
+bash
+Копировать код
+npm install
+# или
+yarn install
+Запуск проекта
+Для запуска в режиме разработки:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+bash
+Копировать код
+npm run dev
+# или
+yarn dev
+Откройте браузер и перейдите по адресу:
 
-- Configure the top-level `parserOptions` property like this:
+arduino
+Копировать код
+http://localhost:3000
+Сборка для продакшн
+Чтобы собрать проект для продакшн:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+bash
+Копировать код
+npm run build
+# или
+yarn build
+Для предпросмотра собранного проекта:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+bash
+Копировать код
+npm run preview
+# или
+yarn preview
+Вклад
+Мы приветствуем вклад сообщества! Если вы хотите внести изменения, пожалуйста, следуйте этим шагам:
+
+Сделайте форк репозитория.
+Создайте ветку для вашего изменения (git checkout -b feature/YourFeature).
+Внесите изменения и закоммитьте их (git commit -m 'Add some feature').
+Отправьте изменения в свою ветку (git push origin feature/YourFeature).
+Создайте Pull Request.
+
+Контакты
+Если у вас есть вопросы или предложения, пожалуйста, свяжитесь со мной через Telegram: @olegzuzzz
