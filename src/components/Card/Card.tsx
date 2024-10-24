@@ -1,60 +1,130 @@
-import { Link } from "react-router-dom";
-import { useRef } from "react";
-import * as S from "./CardStyles";
+import React from "react";
+import styled from "styled-components";
+import ActionButton from "../ActionButton/ActionButton"; // Импорт готового компонента кнопки
+import Colors from "../../AppStyles";
 
-const CardComponent = ({
-  imageUrl,
-  text,
-  rating,
-  description,
-  price,
-}: {
-  imageUrl: string;
-  text: string;
-  rating: number;
-  description: string;
-  price: string;
+interface CardProps {
+  title: string;
+  items: string[];
+  buttonText: string;
+  backgroundColor?: string;
+  buttonVariant?: string; // Опционально для варианта кнопки
+}
+
+const Card: React.FC<CardProps> = ({
+  title,
+  items,
+  buttonText,
+  backgroundColor,
+  buttonVariant = "yellow",
 }) => {
-  const cardWrapperRef = useRef(null);
-
-  const renderCircles = () => {
-    const circles = [];
-    for (let i = 1; i <= 5; i++) {
-      circles.push(
-        rating >= i ? (
-          <S.FullCircleIcon key={i}>●</S.FullCircleIcon>
-        ) : (
-          <S.EmptyCircleIcon key={i}>●</S.EmptyCircleIcon>
-        )
-      );
-    }
-    return circles;
-  };
-
   return (
-    <Link to="/card/1">
-      <S.CardWrapper ref={cardWrapperRef}>
-        <S.ImageBox>
-          <S.Image src={imageUrl} alt="Card Image" />
-        </S.ImageBox>
-        <S.Content
-          isExpanded={
-            cardWrapperRef.current && cardWrapperRef.current.offsetHeight > 300
-          }>
-          <S.FirstRow>
-            <S.CardName>{text}</S.CardName>
-            <S.CardPrice>{price}</S.CardPrice>
-          </S.FirstRow>
-          <S.InfoRow>
-            <S.Avatar></S.Avatar>
-            <S.RatingWrapper>{renderCircles()}</S.RatingWrapper>
-          </S.InfoRow>
-          <S.Nickname>Primer_nick_Primer_nick_Primer</S.Nickname>
-          <S.Description>{description}</S.Description>
-        </S.Content>
-      </S.CardWrapper>
-    </Link>
+    <StyledCard backgroundColor={backgroundColor}>
+      <CardInfo>
+        <CardTitle>{title}</CardTitle>
+        <CardList>
+          {items.map((item, idx) => (
+            <CardItem key={idx}>{item}</CardItem>
+          ))}
+        </CardList>
+      </CardInfo>
+      <ActionButton textButton={buttonText} variant={buttonVariant} />
+    </StyledCard>
   );
 };
 
-export default CardComponent;
+export default Card;
+
+// Стили
+const StyledCard = styled.div<{ backgroundColor?: string }>`
+  background-color: ${({ backgroundColor }) => backgroundColor || "#ffffff"};
+  border: 2px solid ${Colors.black};
+  border-radius: 16px;
+  cursor: pointer;
+  -webkit-box-shadow: 7px 7px 0px 0 rgba(0, 0, 0, 1);
+  -moz-box-shadow: 7px 7px 0px 0 rgba(0, 0, 0, 1);
+  box-shadow: 7px 7px 0px 0 rgba(0, 0, 0, 1);
+
+  padding: 50px 50px 70px 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 350px;
+  height: 450px;
+  padding: 20px 20px 30px 20px;
+  @media (min-width: 425px) {
+
+  }
+
+  @media (min-width: 769px) {
+    width: 380px;
+  }
+
+  @media (min-width: 1025px) {
+    padding: 40px 20px 50px 20px;
+    width: 420px;
+    height: 550px;
+  }
+
+  @media (min-width: 1441px) {
+    padding: 50px 50px 70px 50px;
+    width: 460px;
+    height: 610px;
+  }
+`;
+
+const CardInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CardTitle = styled.h3`
+  font-weight: 500;
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+  font-size: 25px;
+  @media (min-width: 425px) {
+  }
+
+  @media (min-width: 769px) {
+  }
+
+  @media (min-width: 1025px) {
+    font-size: 32px;
+  }
+
+  @media (min-width: 1441px) {
+  }
+`;
+
+const CardList = styled.ul`
+  padding-left: 10px;
+  padding-top: 50px;
+  list-style-position: inside; // Убедимся, что точки отображаются внутри области списка
+  list-style-type: disc; // Устанавливаем тип списка "точки"
+  margin: 0;
+`;
+
+const CardItem = styled.li`
+  font-weight: 300;
+  font-family: "Raleway", sans-serif;
+  margin-bottom: 10px;
+  list-style-type: inherit; // Наследуем стиль списка от ul
+
+  font-size: 18px;
+  padding-bottom: 7px;
+  @media (min-width: 425px) {
+  }
+
+  @media (min-width: 769px) {
+  }
+
+  @media (min-width: 1025px) {
+    font-size: 20px;
+    padding-bottom: 12px;
+  }
+
+  @media (min-width: 1441px) {
+  }
+`;
